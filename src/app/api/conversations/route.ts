@@ -2,7 +2,9 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import { pusherServer } from "@/app/libs/pusher";
-
+interface IParams {
+    conversationId?: string;
+}
 export async function POST(request: Request) {
     try {
 
@@ -79,3 +81,4 @@ export async function POST(request: Request) {
         return new NextResponse('Internal Error', { status: 500 });
     }
 }
+

@@ -14,23 +14,35 @@ interface ConfirmModalProps {
     onClose: () => void;
 }
 
-const ConfirmModalDelete: React.FC<ConfirmModalProps> = ({
+const ConfirmModalBlock: React.FC<ConfirmModalProps> = ({
     isOpen,
     onClose
 }) =>{
     const router = useRouter();
     const {conversationId} = useConversation();
     const [isLoading, setIsLoading] = useState(false);
-    const onDelete = useCallback(()=>{
-        setIsLoading(true);
-        axios.delete(`/api/conversations/${conversationId}`)
-        .then(()=>{
+    const onBlock = useCallback(async () => {
+        try {
+            // Set loading state to true to indicate that the operation is in progress
+            setIsLoading(true);
+    
+            // Send a DELETE request to the API endpoint to block the conversation
+            await axios.put(`/api/conversations/${conversationId}`);
+    
+            // Once the conversation is successfully blocked, redirect to the conversations page
             router.push('/conversations');
+    
+            // Refresh the page to reflect the updated conversation list
             router.refresh();
-        })
-        .catch(()=>toast.error('Something went wrong!'))
-        .finally(()=>setIsLoading(false))
-    },[conversationId, router, onClose])
+        } catch (error) {
+            // If an error occurs during the blocking process, display an error toast
+            toast.error('Something went wrong while blocking the conversation.');
+        } finally {
+            // Regardless of success or failure, set loading state back to false
+            setIsLoading(false);
+        }
+    }, [conversationId, router]);
+    
     return(
         <Modal isOpen={isOpen} onClose={onClose}>
             <div className="sm:flex sm:items-start">
@@ -40,18 +52,18 @@ const ConfirmModalDelete: React.FC<ConfirmModalProps> = ({
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:text-left sm:ml-0">
                     <Dialog.Title as="h3" className="test-base font-semibold leading-6 text-gray-900">
-                        Delete conversation
+                        Block conversation
                     </Dialog.Title>
                     <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                            Are you sure you want to delete this conversation?
+                            Are you sure you want to block this conversation?
                         </p>
                     </div>
                 </div>
             </div>
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                <Button disabled={isLoading} danger onClick={onDelete}>
-                    Delete
+                <Button disabled={isLoading} danger onClick={onBlock}>
+                    Block
                 </Button>
                 <Button disabled={isLoading} secondary onClick={onClose}>
                     Cancel
@@ -61,4 +73,4 @@ const ConfirmModalDelete: React.FC<ConfirmModalProps> = ({
     );
 }
 
-export default ConfirmModalDelete;
+export default ConfirmModalBlock;

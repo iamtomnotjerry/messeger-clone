@@ -4,11 +4,12 @@ import { Conversation, User } from "@prisma/client";
 import { format } from "date-fns";
 import { Fragment, useMemo, useState } from "react";
 import { Dialog, Transition } from '@headlessui/react'
-import { IoClose, IoTrash } from "react-icons/io5";
+import { IoClose, IoCloseCircleOutline, IoTrash } from "react-icons/io5";
 import Avatar from "@/app/components/Avatar";
-import ConfirmModal from "./ConfirmModal";
 import AvatarGroup from "@/app/components/AvatarGroup";
 import useActive from "@/app/hooks/useActive";
+import ConfirmModalDelete from "./ConfirmModal";
+import ConfirmModalBlock from "./ConfirmModalBlock";
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -47,7 +48,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
     return (
         <>
-        <ConfirmModal
+        <ConfirmModalDelete
+            onClose={()=>setisModelOpen(false)}
+            isOpen={isModelOpen}
+        />
+        <ConfirmModalBlock
             onClose={()=>setisModelOpen(false)}
             isOpen={isModelOpen}
         />
@@ -114,6 +119,16 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                         <IoTrash size={20}/>
                                                     </div>
                                                     <div className="text-sm font-light text-neutral-600">Delete
+                                                    </div>
+                                                </div>
+                                                <div onClick={()=>setisModelOpen(true)}
+                                                    className="flex-col flex gap-3 items-center cursor-pointer hover:opacity-75"
+                                                >
+                                                    <div 
+                                                    className="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center">
+                                                        <IoCloseCircleOutline  size={20}/>
+                                                    </div>
+                                                    <div className="text-sm font-light text-neutral-600">Block
                                                     </div>
                                                 </div>
                                             </div>

@@ -28,6 +28,7 @@ model User {
   seenMessages      Message[]    @relation("Seen", fields: [seenMessageIds], references: [id])
   accounts          Account[]
   messages          Message[]
+
 }
 
 model Account {
@@ -57,6 +58,7 @@ model Conversation{
       messages Message[]
       userIds String[] @db.ObjectId
       users User[] @relation(fields: [userIds],references: [id])
+      status           String?      @default("active")
 
 }
 

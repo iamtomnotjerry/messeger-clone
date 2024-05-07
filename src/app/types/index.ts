@@ -5,7 +5,12 @@ export type FullMessageType = Message & {
     seen: User[]
 };
 
-export type FullConversationType  = Conversation & {
-    users: User[],
-    messages: FullMessageType[],
+
+export interface FullConversationType {
+    id: string;
+    name?: string | null; // Adjusted to allow for undefined as well
+    messages: FullMessageType[];
+
+    isGroup?: boolean | null; // Change the type definition to accept nullable boolean
+    users?: User[];
 }

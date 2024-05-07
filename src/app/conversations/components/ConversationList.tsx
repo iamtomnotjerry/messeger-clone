@@ -22,6 +22,8 @@ const ConversationList: React.FC<ConversationListProps> = ({
     initialItems,
     users
 }) => {
+    const [searchQuery, setSearchQuery] = useState("");
+    console.log(searchQuery)
     const session = useSession();
     const [items, setItems] = useState(initialItems);
     const [isModalOpen, setisModelOpen] = useState(false);
@@ -30,6 +32,11 @@ const ConversationList: React.FC<ConversationListProps> = ({
         return session.data?.user?.email
     },[session.data?.user?.email])
     const { conversationId, isOpen } = useConversation();
+    const filteredItems = items.filter(item =>
+        item.users &&
+        item.users.some(user => user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+    console.log(filteredItems)
     useEffect(()=>{
         if(!pusherKey){
             return; 
@@ -114,13 +121,22 @@ const ConversationList: React.FC<ConversationListProps> = ({
                             <MdOutlineGroupAdd size={20}/>
                         </div>
                     </div>
-                    {items.map((item) => (
-                        <ConversationBox
+                    {/* Search bar */}
+            <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search conversations..."
+            />
+                    {filteredItems.map((item) => (
+                <ConversationBox
                             key={item.id}
                             data={item}
-                            selected={conversationId === item.id}
-                        />
-                    ))}
+                            selected={conversationId === item.id} searchQuery={""} setSearchQuery={function (query: string): void {
+                                throw new Error("Function not implemented.");
+                            } }                />
+            ))}
+        
                 </div>
             </aside>
         </>

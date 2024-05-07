@@ -5,7 +5,8 @@ import {HiChat} from "react-icons/hi";
 
 import {
     HiArrowLeftOnRectangle,
-    HiUsers
+    HiUsers,
+    HiOutlineClipboard 
 } from "react-icons/hi2";
 
 import {signOut} from "next-auth/react";
@@ -26,6 +27,12 @@ const useRouters = () => {
             href: '/users',
             icon: HiUsers,
             active: pathname === '/users' 
+        },
+        {
+            label: 'Rules',
+            href: '/rules',
+            icon: HiOutlineClipboard ,
+            active: pathname === '/rules' 
         },
         {
             label: 'Logout',

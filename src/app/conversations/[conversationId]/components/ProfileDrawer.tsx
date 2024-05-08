@@ -25,9 +25,10 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     data
 }) => {
     const otherUser = useOtherUser(data);
-    const {members} = useActive();
-    const isActive = members.indexOf(otherUser?.email!)!==-1;
-    const[isModelOpen,setisModelOpen] = useState(false);
+    const { members } = useActive();
+    const isActive = members.indexOf(otherUser?.email!) !== -1;
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isBlockModalOpen, setIsBlockModalOpen] = useState(false);
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP');
     }, [otherUser.createdAt]);
@@ -40,7 +41,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
         }
         return isActive ? 'Active' : 'Offline';
     }, [data])
-
     const onDeleteConversation = () => {
         // Implement conversation deletion logic here
         // For example, you might call an API to delete the conversation
@@ -48,14 +48,14 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
     return (
         <>
-        <ConfirmModalDelete
-            onClose={()=>setisModelOpen(false)}
-            isOpen={isModelOpen}
-        />
-        <ConfirmModalBlock
-            onClose={()=>setisModelOpen(false)}
-            isOpen={isModelOpen}
-        />
+         <ConfirmModalDelete
+                onClose={() => setIsDeleteModalOpen(false)}
+                isOpen={isDeleteModalOpen}
+            />
+            <ConfirmModalBlock
+                onClose={() => setIsBlockModalOpen(false)}
+                isOpen={isBlockModalOpen}
+            />
         <Transition.Root show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50" onClose={onClose}>
                 <Transition.Child
@@ -111,7 +111,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                 {statusText}
                                             </div>
                                             <div className="flex gap-10 my-8">
-                                                <div onClick={()=>setisModelOpen(true)}
+                                                <div onClick={()=>setIsDeleteModalOpen(true)}
                                                     className="flex-col flex gap-3 items-center cursor-pointer hover:opacity-75"
                                                 >
                                                     <div 
@@ -121,7 +121,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                     <div className="text-sm font-light text-neutral-600">Delete
                                                     </div>
                                                 </div>
-                                                <div onClick={()=>setisModelOpen(true)}
+                                                <div onClick={()=>setIsBlockModalOpen(true)}
                                                     className="flex-col flex gap-3 items-center cursor-pointer hover:opacity-75"
                                                 >
                                                     <div 

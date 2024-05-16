@@ -32,7 +32,7 @@ const About: React.FC<AboutProps> = ({ aboutRef }) => {
                             We create a safe and supportive environment for you to explore your thoughts and emotions without judgment. Together, we can overcome challenges and achieve meaningful change.
                         </p>
                         <p className="text-lg leading-relaxed text-gray-800 mb-6">
-                            Whether you're dealing with anxiety, depression, trauma, or relationship issues, our team is here to help you on your journey to mental wellness. Let's work towards a brighter future together.
+                            Whether you&apos;re dealing with anxiety, depression, trauma, or relationship issues, our team is here to help you on your journey to mental wellness. Let&apos;s work towards a brighter future together.
                         </p>
                         <div className="text-center">
                             <Link href="/about" className="text-blue-600 hover:underline">

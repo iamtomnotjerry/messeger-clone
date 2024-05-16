@@ -71,7 +71,7 @@ const Member: React.FC<MemberProps> = ({ memberRef }) => {
                                 className="w-full h-64 object-cover rounded-md mb-4"
                             />
                             <h3 className="text-xl font-semibold mb-2">Quốc Thịnh</h3>
-                            <p className="text-gray-600">Never give up, don't lose hope.</p>
+                            <p className="text-gray-600">Never give up, don&apos;t lose hope.</p>
                         </div>
                         <Link href={'/quocthinh'}>
                         <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full mt-4">

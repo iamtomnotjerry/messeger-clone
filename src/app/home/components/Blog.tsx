@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef } from "react";
-
-const Blog = ({ blogRef }) => {
+interface blogRef {
+    blogRef: React.RefObject<any>;
+}
+const Blog: React.FC<blogRef> = ({ blogRef }) => {
     return (
         <section ref={blogRef} className="bg-gray-100 py-12">
             <div className="container mx-auto px-4">
@@ -15,7 +17,7 @@ const Blog = ({ blogRef }) => {
                             <Image src="/meat.jpg" alt="Blog Post 1" layout="fill" objectFit="cover" />
                         </div>
                         <div className="p-6">
-                            <h3 className="text-xl font-semibold mb-2">Meat doesn't make you fat</h3>
+                            <h3 className="text-xl font-semibold mb-2">Meat doesn&apos;t make you fat</h3>
                             
                         </div>
                     </div>

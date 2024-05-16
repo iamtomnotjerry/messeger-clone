@@ -4,10 +4,10 @@ interface NavigationProps {
     memberRef: React.RefObject<any>;
     serviceRef: React.RefObject<any>;
     blogRef: React.RefObject<any>;
-    contactRef: React.RefObject<any>;
+
 }
 
-const Navigation: React.FC<NavigationProps> = ({ aboutRef, memberRef, serviceRef, blogRef, contactRef }) => {
+const Navigation: React.FC<NavigationProps> = ({ aboutRef, memberRef, serviceRef, blogRef }) => {
     const scrollToRef = (ref:any) => {
         if (ref.current) {
             ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -23,7 +23,7 @@ const Navigation: React.FC<NavigationProps> = ({ aboutRef, memberRef, serviceRef
                     <li><a href="#" className="hover:text-gray-300" onClick={() => scrollToRef(memberRef)}>Psychotherapy Expert</a></li>
                     <li><a href="#" className="hover:text-gray-300" onClick={() => scrollToRef(serviceRef)}>Service</a></li>
                     <li><a href="#" className="hover:text-gray-300" onClick={() => scrollToRef(blogRef)}>Blog</a></li>
-                    <li><a href="#" className="hover:text-gray-300" onClick={() => scrollToRef(contactRef)}>Contact</a></li>
+
                 </ul>
             </div>
         </nav>

@@ -37,7 +37,7 @@ const Home = () => {
 
     return (
         <div>
-            <Navigation aboutRef={aboutRef} memberRef={memberRef} serviceRef={serviceRef} blogRef={blogRef} contactRef={undefined} />
+            <Navigation aboutRef={aboutRef} memberRef={memberRef} serviceRef={serviceRef} blogRef={blogRef} />
             <Banner />
             <About aboutRef={aboutRef} />
             <Member memberRef={memberRef} />

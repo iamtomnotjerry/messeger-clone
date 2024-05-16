@@ -16,7 +16,7 @@ const AuthForm = () => {
     const router = useRouter();
     useEffect(()=>{
         if (session?.status === 'authenticated'){
-            router.push('/users');
+            router.push('/home');
         }
     },[session?.status,router])
     const [variant, setVariant] = useState<Variant>('LOGIN');
@@ -43,6 +43,7 @@ const AuthForm = () => {
                 .finally(()=>setIsLoading(false))
             }
             if (variant === 'LOGIN') {
+                
                 signIn('credentials',{
                     ...data,
                     redirect:false
@@ -52,8 +53,9 @@ const AuthForm = () => {
                         toast.error('Invaild credentials');
                     }
                     if(callback?.ok && !callback?.error){
+
                         toast.success('Logged in!')
-                        router.push('/users');
+                        router.push('/home');
                     }
                 })
                 .finally(()=>setIsLoading(false))

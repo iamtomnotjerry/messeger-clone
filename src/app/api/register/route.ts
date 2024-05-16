@@ -23,7 +23,7 @@ export async function POST(request: Request) {
                 emailVerified: new Date(), // Set emailVerified to current date and time
             },
         });
-
+        
         return NextResponse.json(user);
     } catch (error: any) {
         console.log(error, "REGISTRATION_ERROR");

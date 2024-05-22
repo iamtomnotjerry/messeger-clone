@@ -1,7 +1,7 @@
 import {useMemo} from 'react';
 import { usePathname } from 'next/navigation';
 
-import {HiChat} from "react-icons/hi";
+import {HiChat,HiHome} from "react-icons/hi";
 
 import {
     HiArrowLeftOnRectangle,
@@ -35,12 +35,19 @@ const useRouters = () => {
             active: pathname === '/rules' 
         },
         {
+            label: 'Home',
+            href: 'home',
+            active: pathname === '/home',
+            icon: HiHome,
+        },
+        {
             label: 'Logout',
             href: '#',
 
             onClick: ()=>signOut(),
             icon: HiArrowLeftOnRectangle,
-        }
+        },
+        
     ],[pathname,conversationId])
     return routes;
 }
